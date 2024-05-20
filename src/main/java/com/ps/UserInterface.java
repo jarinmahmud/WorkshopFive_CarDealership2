@@ -1,5 +1,7 @@
 package com.ps;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -25,6 +27,7 @@ public class UserInterface {
         System.out.println("7. List all vehicles");
         System.out.println("8. Add a vehicle");
         System.out.println("9. Remove a vehicle");
+        System.out.println("10. Sell/Lease a Vehicle");
         System.out.println("99. Quit");
         System.out.println("Enter your choice:");
     }
@@ -66,6 +69,52 @@ public class UserInterface {
                     break;
                 case 9:
                     processRemoveVehicleRequest(scanner);
+                    break;
+                case 10:
+                    System.out.print("Enter date (MMDDYYYY): ");
+                    String date = scanner.nextLine();
+
+                    System.out.print("Enter customer name: ");
+                    String customerName = scanner.nextLine();
+
+                    System.out.print("Enter customer email: ");
+                    String customerEmail = scanner.nextLine();
+
+                    System.out.print("Enter vehicle VIN: ");
+                    String vehicleVin = scanner.nextLine();
+
+                    System.out.print("Enter vehicle price: ");
+                    double price = scanner.nextDouble();
+                    scanner.nextLine();
+
+                    System.out.print("Is this a sale or a lease (sale/lease): ");
+                    String contractType = scanner.nextLine();
+
+                    Contract contract = null;
+
+                    if ("sale".equalsIgnoreCase(contractType)) {
+                        System.out.print("Do you want to finance the vehicle (yes/no): ");
+                        String financeOption = scanner.nextLine();
+                        boolean finance = "yes".equalsIgnoreCase(financeOption);
+
+                        contract = new SalesContract(date, customerName, customerEmail, vehicleVin, price, finance);
+                    } else if ("lease".equalsIgnoreCase(contractType)) {
+                        LocalDate vehicleYear = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyyMMdd"));
+                        if (vehicleYear.isBefore(LocalDate.now().minusYears(3))) {
+                            System.out.println("You can't lease a vehicle over 3 years old.");
+                            continue;
+                        }
+
+                        contract = new LeaseContract(date, customerName, customerEmail, vehicleVin, price);
+                    } else {
+                        System.out.println("Invalid contract type.");
+                        continue;
+                    }
+
+                    ContractFileManager.saveContract(contract);
+                    System.out.println("Contract saved.");
+                    // Here you would remove the vehicle from inventory
+
                     break;
                 case 99:
                     running = false;
