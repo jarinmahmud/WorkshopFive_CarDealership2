@@ -1,22 +1,28 @@
-## Car Dealership CLI Application
+## Car Dealership 2 CLI Application
 ## Purpose:
-Store and remove car data and filter by elements.
+Store and remove car data and filter by elements. Also, sale or lease feature included.
 
 ## Planning chart:
 The project code will follow the outline attached below:
 
-| Main and constructor class                  | Screen Classes     | Method Classes             | Other Files  |
-|---------------------------------------------|--------------------|----------------------------|--------------|
-| Main.java                                   | UserInterface.java | DealershipFileManager.java | workData.txt |
-| Vehicle.java                                |                    |                            | Readme.md    |
-| Dealership.java  (also has working methods) |                    |                            |              |
-
+| Main and constructor class                  | Screen Classes     | Method Classes             | Other Files   |
+|---------------------------------------------|--------------------|----------------------------|---------------|
+| Main.java                                   | UserInterface.java | DealershipFileManager.java | workData.txt  |
+| Vehicle.java                                |                    | ContractFileManager.java   | contracts.txt |
+| Dealership.java  (also has working methods) |                    | LeaseContract.java         | Readme.md     |
+| Contract.java                               |                    | SalesContract.java         |               |
 ## Understanding Class Functions:
 Main.java: Main class to call methods. <br/>
 Vehicle.java: Contains constructor, getters and setters for vehicle. <br/>
 Dealership.java: Contains constructor, getters and setters for dealership. <br/>
 UserInterface.java: Contains code of displaying screen prompt and process all prompt request. <br/>
 DealershipFileManager.java: Contains code of read and save from/to the data file. <br/>
+Contract.java: Contains constructor, getters and setters for contract. <br/>
+ContractFileManager.java: Contains code of read and save from/to the data file of contract details. <br/>
+LeaseContract.java: Contains code of leasing a vehicle. <br/>
+SalesContract.java: Contains code of selling a vehicle. <br/>
+workData.txt: inventory file, also working data file for inventory. <br/>
+contracts.txt: working data file for sale/lease record. <br/>
 Readme.md: Contains project details.
 
 ## Code Snippets:
